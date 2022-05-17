@@ -1,8 +1,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "../GlobalScheduler/GlobalScheduler.h"
-
+#include <GlobalScheduler.h>
 
 void setup() {
   Serial.begin(9600);
@@ -12,4 +11,6 @@ void setup() {
 
 void loop() {
   MainTaskScheduler();
+
+
 }

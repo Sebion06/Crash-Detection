@@ -1,6 +1,7 @@
-#include "GlobalScheduler.h"
-#include "../../MPU6050Driver/MPU6050Driver.h"
+#include <GlobalScheduler.h>
 
+#include <Arduino.h>
+#include <Wire.h>
 long tk1_timer = 0;
 long tk2_timer = 0;
 long tk3_timer = 0;
@@ -10,8 +11,14 @@ void TK_1(){
 }
 
 void TK_2(){
-    GetAccelerationData();
 
+    float acc_array[3];
+    MPU6050Driver_MainFunction(acc_array);
+    CrashDetectionAlgorithm_MainFunction(*(acc_array),*(acc_array + 1),*(acc_array + 2));
+    //Serial.print(crash_severity);
+    CrashReactionManager_MainFunction(crash_type, crash_severity);
+    crash_type=0;
+    crash_severity=0;
 }
 
 void TK_3(){
@@ -36,5 +43,7 @@ void MainTaskScheduler(){
 
 void TK_init()
 {
-    MainFunction();
+    IOdriver_Init();
+    SystemStateManager_Init();
+    MPU6050Driver_Init();
 }

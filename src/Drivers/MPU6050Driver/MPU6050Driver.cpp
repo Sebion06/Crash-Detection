@@ -5,7 +5,7 @@
  * Note that X and Y are tilt angles and not pitch/roll.
  */
 
-#include "MPU6050Driver.h"
+#include <MPU6050Driver.h>
 
 MPU6050 mpu(Wire);
 
@@ -30,14 +30,18 @@ void printValues(float valueX, float valueY, float valueZ)
         Serial.print((String)valueZ);
 }
 
-void GetAccelerationData(){
+void GetAccelerationData(float *acc_data){
     mpu.update();
-    printValues(mpu.getAccX(),mpu.getAccY(),mpu.getAccZ());
-    //printValues(mpu.getGyroX(),mpu.getGyroY(),mpu.getGyroZ());
-    Serial.println("");
+    acc_data[0] = mpu.getAccX();
+    acc_data[1] = mpu.getAccY();
+    acc_data[2] = mpu.getAccZ();
+    // printValues(mpu.getAccX(),mpu.getAccY(),mpu.getAccZ());
+    // //printValues(mpu.getGyroX(),mpu.getGyroY(),mpu.getGyroZ());
+    // Serial.println("");
+    
 }
 
- void DriverInit(){
+ void MPU6050Driver_Init(){
    Serial.begin(9600);
    Wire.begin();
   
@@ -52,7 +56,8 @@ void GetAccelerationData(){
     Serial.println( "Done!\n");
 }
 
-void MainFunction()
+void MPU6050Driver_MainFunction(float *acc_array)
 {
-    DriverInit();
+    GetAccelerationData(acc_array);
+    
 }
