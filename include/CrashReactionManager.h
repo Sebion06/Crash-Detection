@@ -1,3 +1,3 @@
 #include <IODriver.h>
 
-void CrashReactionManager_MainFunction(int, int);
+void CrashReactionManager_MainFunction();

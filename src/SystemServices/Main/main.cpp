@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <GlobalScheduler.h>
+#include <GpsDriver.h>
 
 void setup() {
   Serial.begin(9600);
@@ -11,6 +12,7 @@ void setup() {
 
 void loop() {
   MainTaskScheduler();
+  //GpsDriver_MainFunction();
 
 
 }

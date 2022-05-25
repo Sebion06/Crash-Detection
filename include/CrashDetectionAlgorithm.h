@@ -15,5 +15,5 @@ extern int crash_type;
 extern int crash_severity;
 
 void CrashDetectionAlgorithm_MainFunction(float, float, float);
-void CrashDetectionAlgorithm_GetCrashSeverity();
-void CrashDetectionAlgorithm_GetCrashType();
+int CrashDetectionAlgorithm_GetCrashSeverity();
+int CrashDetectionAlgorithm_GetCrashType();

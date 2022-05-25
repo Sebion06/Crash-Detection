@@ -10,18 +10,18 @@ void TK_1(){
 
 }
 
-void TK_2(){
+void TK_2(){ //crash detection & reaction
 
     float acc_array[3];
     MPU6050Driver_MainFunction(acc_array);
     CrashDetectionAlgorithm_MainFunction(*(acc_array),*(acc_array + 1),*(acc_array + 2));
     //Serial.print(crash_severity);
-    CrashReactionManager_MainFunction(crash_type, crash_severity);
-    crash_type=0;
-    crash_severity=0;
+    CrashReactionManager_MainFunction();
 }
 
-void TK_3(){
+void TK_3(){  //crash recording
+    SystemStateManager_MainFunction();
+    CrashDataRecorder_MainFunction();
 
 }
 
@@ -44,6 +44,8 @@ void MainTaskScheduler(){
 void TK_init()
 {
     IOdriver_Init();
-    SystemStateManager_Init();
     MPU6050Driver_Init();
+    GpsDriver_Init();
+    SystemStateManager_Init();
+
 }
